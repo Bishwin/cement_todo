@@ -26,6 +26,7 @@ from .controllers.items import Items
 
 # configuration defaults
 CONFIG = init_defaults('todo')
+CONFIG['todo']['email'] = 'noreply@yourdomain.com'
 CONFIG['todo']['db_file'] = './.todo/db.json'
 CONFIG['todo']['foo'] = 'bar'
 
