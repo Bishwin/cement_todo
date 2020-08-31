@@ -63,9 +63,18 @@ class Items(Controller):
         
         self.app.db.update(item, doc_ids=[id])
 
-    @ex(help='delete an item')
+    @ex(help='delete an item',
+        arguments=[
+            ( ['item_id'],
+              {'help': 'todo item database id',
+              'action': 'store'} ),
+        ],
+    )
     def delete(self):
-        pass
+        id = int(self.app.pargs.item_id)
+        self.app.log.info('deleting todo item id: %s' % id)
+        self.app.db.remove(doc_ids=[id])
+        #TODO catch err when doc doesn't exist
 
     @ex(
         help='complete an item',
