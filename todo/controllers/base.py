@@ -1,4 +1,4 @@
-
+import time
 from cement import Controller, ex
 from cement.utils.version import get_version_banner
 from ..core.version import get_version
@@ -48,13 +48,23 @@ class Base(Controller):
     )
     def command1(self):
         """Example sub-command."""
+        sec = 1500
+        
+        while sec > 0:
+            import os
+            os.system('cls' if os.name == 'nt' else 'clear')
+            ty_res = time.gmtime(sec)
+            res = time.strftime("%H:%M:%S",ty_res)
+            self.app.render({ 'time' : res, }, 'timer.jinja2')
+            sec = sec - 1
+            time.sleep(1)
+            
+        # data = {
+        #     'foo' : 'bar',
+        # }
 
-        data = {
-            'foo' : 'bar',
-        }
+        # ### do something with arguments
+        # if self.app.pargs.foo is not None:
+        #     data['foo'] = self.app.pargs.foo
 
-        ### do something with arguments
-        if self.app.pargs.foo is not None:
-            data['foo'] = self.app.pargs.foo
-
-        self.app.render(data, 'command1.jinja2')
+        # self.app.render(data, 'command1.jinja2')
